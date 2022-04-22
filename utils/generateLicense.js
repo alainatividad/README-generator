@@ -1,10 +1,10 @@
 // create LICENSE file that is linked in the renderLicenseLink function
 function generateLicense(data) {
-    const licenseText = '';
+    let licenseText = '';
     const today = new Date();  
     const year = today.getFullYear();
   
-    switch (license) {
+    switch (data.license) {
       case 'Apache':
         licenseText = `                                 Apache License
         Version 2.0, January 2004

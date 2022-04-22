@@ -50,8 +50,7 @@ const questions = [
       }      
       return 'Please enter a valid project name';
     }
-  }
-  ,
+  },
   {
     type: 'editor',
     name: 'desc',
@@ -62,13 +61,6 @@ const questions = [
     //   }      
     //   return 'Please enter a description.';
     // }
-  },
-  {
-    type: 'list',
-    name: 'license',
-    message: 'License:',
-    Choices: ['Apache', 'GNU GPLv3', 'MIT', 'Mozilla', 'Unlicense', 'None'],
-    default: 5
   },
   {
     type: 'input',
@@ -93,17 +85,6 @@ const questions = [
     }
   },
   {
-    type: 'editor',
-    name: 'contribute',
-    message: 'What do we need to know about contributing?',
-    validate(value) {
-      if (value) {
-        return true;
-      }      
-      return 'Please enter a text.';
-    }
-  },
-  {
     type: 'input',
     name: 'test',
     message: 'How do you test the program?',
@@ -112,6 +93,24 @@ const questions = [
         return true;
       }      
       return 'Please enter a test code.';
+    }
+  },
+  {
+    type: 'list',
+    name: 'license',
+    message: 'License:',
+    choices: ['Apache', 'GNU GPLv3', 'MIT', 'Mozilla', 'Unlicense', 'None'],
+    default: 5
+  },
+  {
+    type: 'editor',
+    name: 'contribute',
+    message: 'What do we need to know about contributing?',
+    validate(value) {
+      if (value) {
+        return true;
+      }      
+      return 'Please enter a text.';
     }
   }
 ];
@@ -126,9 +125,9 @@ function writeToFile(fileName, data) {
 function init() {
   inquirer.prompt(questions).then((answers) => {
     // console.log(JSON.stringify(answers, null, '  '));
-    // console.log(module);
+    // console.log(generateMarkdown(answers));
     writeToFile('README.md', generateMarkdown(answers));
-    if (answers.license !== 'None') {
+    if (answers.license && answers.license !== 'None') {
       writeToFile('LICENSE', generateLicense(answers));
     }
   });

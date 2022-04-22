@@ -70,8 +70,7 @@ function renderLicenseSection(license) {
     
     return `## License
 
-    ${licenseLink}.
-    ` 
+${licenseLink}` 
   }
 }
 
@@ -81,48 +80,49 @@ function generateMarkdown(data) {
   const licenseSection = renderLicenseSection(`${data.license}`);
   const tableContent = (licenseSection !== 'None') ? '- [License](#license)' : '';
 
-  return `# ${data.projectName}
+  return `# ${data.title}
 
-  ${licenseBadge}
-  
-  ## Description
+${licenseBadge}
 
-  Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+## Description
 
-  ## Table of Contents
-  
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Credits](#credits)
-  ${tableContent}
+${data.desc}
 
-  ## Installation
-  
-  \`\`\`
-  ${data.install}  
-  \`\`\`
-  
-  ## Usage
-  
-  \`\`\`
-  ${data.usage}
-  \`\`\`
-  
-  ${licenseSection}
-    
-  ## Contributing
+## Table of Contents
 
-  ${data.contribute}
-  
-  ## Tests
-  
-  \`\`\`
-  ${data.test}
-  \`\`\`
-  
-  ## Questions
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tests](#tests)
+- [Contributing](#contributing)
+${tableContent}
 
-  For more information, go to my [Github](https://www.github.com/${data.username}) or contact [${data.email}](mailto:${data.email}) with any additional questions or comments.
+## Installation
+
+\`\`\`
+${data.install}  
+\`\`\`
+
+## Usage
+
+\`\`\`
+${data.usage}
+\`\`\`
+
+## Tests
+
+\`\`\`
+${data.test}
+\`\`\`
+
+## Contributing
+
+${data.contribute}
+
+## Questions
+
+For more information, go to my [Github](https://www.github.com/${data.username}) or contact [${data.email}](mailto:${data.email}) with any additional questions or comments.
+
+${licenseSection}
   
   `
 ;
