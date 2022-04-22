@@ -1,4 +1,5 @@
 // create LICENSE file that is linked in the renderLicenseLink function
+// Some Licenses need the full name of the author of the program so it was added to the array of questions
 function generateLicense(data) {
     let licenseText = '';
     const today = new Date();  

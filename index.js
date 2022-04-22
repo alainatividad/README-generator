@@ -7,6 +7,7 @@ const generateLicense = require('./utils/generateLicense');
 
 // Create an array of questions for user input
 const questions = [
+  // Added validate for every item so that the user is required to answer everything
   {
     type: 'input',
     name: 'name',
@@ -54,13 +55,13 @@ const questions = [
   {
     type: 'editor',
     name: 'desc',
-    message: 'Enter a short project description:'
-    // validate(value) {
-    //   if (value) {
-    //     return true;
-    //   }      
-    //   return 'Please enter a description.';
-    // }
+    message: 'Enter a short project description:',
+    validate(value) {
+      if (value) {
+        return true;
+      }      
+      return 'Please enter a description.';
+    }
   },
   {
     type: 'input',
@@ -115,7 +116,7 @@ const questions = [
   }
 ];
 
-// Create a function to write README file
+// Create a function to write the files
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, (err) =>
     err ? console.error(err) : console.log(`${fileName} successfully created!`));
@@ -124,9 +125,9 @@ function writeToFile(fileName, data) {
 // Create a function to initialize app
 function init() {
   inquirer.prompt(questions).then((answers) => {
-    // console.log(JSON.stringify(answers, null, '  '));
-    // console.log(generateMarkdown(answers));
+    // create README file
     writeToFile('README.md', generateMarkdown(answers));
+    // create LICENSE file if user selected a License
     if (answers.license && answers.license !== 'None') {
       writeToFile('LICENSE', generateLicense(answers));
     }
